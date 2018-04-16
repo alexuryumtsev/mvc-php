@@ -1,0 +1,37 @@
+<h3>Users</h3>
+<table class="table table-striped" style="width:400px;">
+    <?php foreach($data['user'] as $user_data) { ?>
+    <tr>
+        <td><b><?=$user_data['lastname']?></b></td>
+        <td><b><?=$user_data['name']?></b></td>
+        <td align="right">
+            <a href="/admin/users/edit/<?=$user_data['id']?>"><button class="btn btn-sm btn-primary">edit</button></a>
+            <a href="/admin/users/view/<?=$user_data['id']?>"><button class="btn btn-sm btn-primary">view</button></a>
+            <a href="/admin/users/delete/<?=$user_data['id']?>" onclick="return confirmDelete();"><button class="btn btn-sm btn-warning">delete</button></a>
+
+        </td>
+    </tr>
+    <?php } ?>
+
+</table>
+
+<br/>
+
+<?php
+
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+$p = new Pagination(array(
+    'itemsCount' => 11,'itemsPerPage' => 2, 'currentPage' => $page));
+?>
+
+<?php foreach ($p->buttons as $button) :
+if ($button->isActive) : ?>
+<a href = '?page=<?=$button->page?>'><?=$button->text?></a>
+<?php else : ?>
+<span style="color:#555555"><?=$button->text?></span>
+<?php endif;
+endforeach; ?>
+
+
+

@@ -1,0 +1,54 @@
+<h3>Edit page</h3><br/>
+<form method="post" action="">
+
+    <input type="hidden" name="id" value="<?=$data['user']['id']?>"/>
+
+    <div class="form-group">
+        <label for="lastname">Last Name</label>
+        <input type="text" id="lastname" name="lastname" value="<?=$data['user']['lastname']?>" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" value="<?=$data['user']['name']?>" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label for="fathername">Father Name</label>
+        <textarea name="fathername" id="fathername" class="form-control"><?=$data['user']['fathername']?></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="birthday">Birthday</label>
+        <textarea name="birthday" id="birthday" class="form-control"><?=$data['user']['birthday']?></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="email">email</label>
+        <textarea name="email" id="email" class="form-control"><?=$data['user']['email']?></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="password">Birthday</label>
+        <textarea name="password" id="password" class="form-control"><?=$data['user']['password']?></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="phone">Birthday</label>
+        <textarea name="phone" id="phone" class="form-control"><?=$data['user']['phone']?></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="address">Birthday</label>
+        <textarea name="address" id="address" class="form-control"><?=$data['user']['address']?></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="sex">Birthday</label>
+        <textarea name="sex" id="sex" class="form-control"><?=$data['user']['sex']?></textarea>
+    </div>
+
+
+
+    <input type="submit" class="btn btn-success" />
+</form>
