@@ -21,8 +21,7 @@
 
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
-$p = new Pagination(array(
-    'itemsCount' => 11,'itemsPerPage' => 2, 'currentPage' => $page));
+$p = new Pagination(array('itemsCount' => 11,'itemsPerPage' => 4, 'currentPage' => $page));
 ?>
 
 <?php foreach ($p->buttons as $button) :

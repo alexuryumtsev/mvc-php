@@ -18,10 +18,12 @@ class Registration extends Model {
         $phone = $this->db->escape($data['phone']);
         $address = $this->db->escape($data['address']);
 
-            if (isset($data['sex'])){
+        if (isset($data['sex_man'])){
                 $sex = 'man';
             } else {
-                $sex = 'woman';
+
+                 $sex = 'woman';
+
             }
 
         $row = "SELECT id FROM  users_data  WHERE email = '{$email}'";
@@ -38,6 +40,7 @@ class Registration extends Model {
 
         if ($password == $e_password){
 
+            $password = md5($password);
 
             if (!$id){
                 $sql = "insert into users_data set lastname = '{$lastname}', name = '{$name}', fathername = '{$fathername}',
