@@ -2,7 +2,8 @@
 
 class Registration extends Model {
 
-    public function save($data, $id = null) {
+    public function save($data, $id = null)
+    {
 
         $id = (int)$id;
         $lastname = $this->db->escape($data['lastname']);
@@ -18,24 +19,18 @@ class Registration extends Model {
         $phone = $this->db->escape($data['phone']);
         $address = $this->db->escape($data['address']);
 
-        if (isset($data['sex_man'])){
-                $sex = 'man';
-            } else {
-
-                 $sex = 'woman';
-
-            }
-
-        $row = "SELECT id FROM  users_data  WHERE email = '{$email}'";
-
-        $result = $this->db->query($row);
-        if ($result > 0) {
-
-            Session::setFlash('Such email exists');
+        if (isset($data['sex'])) {
+            $sex = 'man';
         } else {
+            $sex = 'woman';
+        }
 
-                Session::setFlash('Ok');
-            }
+//        $sql = "SELECT id FROM  users_data  WHERE email = '{$email}'";
+//
+//        $result = $this->db->query($sql);
+//        while ($row = $result->fetch()) {
+//            echo $row['email'] . "\n";
+//        }
 
 
         if ($password == $e_password){

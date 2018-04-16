@@ -25,11 +25,9 @@ class User extends Model{
         $kol = 3;
         $art = ($page * $kol)-$kol;
 
-
         $result = "SELECT * FROM users_data LIMIT $art,$kol";
         return $this->db->query($result);
-        //$sql =  "select * from users_data limit 3";
-        //return $this->db->query($sql);
+
     }
 
 
