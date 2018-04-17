@@ -2,6 +2,12 @@
 
 <form class="form-horizontal" action="" method="post">
     <div class="form-group">
+        <label class="control-label col-xs-3" for="login">Login:</label>
+        <div class="col-xs-9">
+            <input type="text" class="form-control" id="login" name="login" placeholder="Введите login">
+        </div>
+    </div>
+    <div class="form-group">
         <label class="control-label col-xs-3" for="lastname">Фамилия:</label>
         <div class="col-xs-9">
             <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Введите фамилию">
@@ -28,7 +34,7 @@
     </div>
 
     <div class="form-group">
-        <label class="control-label col-xs-3" for="email">Email/Login:</label>
+        <label class="control-label col-xs-3" for="email">Email:</label>
         <div class="col-xs-9">
             <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
         </div>
@@ -62,12 +68,12 @@
         <label class="control-label col-xs-3">Пол:</label>
         <div class="col-xs-2">
             <label class="radio-inline">
-                <input type="radio" name="men" required> Мужской
+                <input type="radio" name="sex" value="men" required> Мужской
             </label>
         </div>
         <div class="col-xs-2">
             <label class="radio-inline">
-                <input type="radio" name="women" required> Женский
+                <input type="radio" name="sex" value="women" required> Женский
             </label>
         </div>
     </div>

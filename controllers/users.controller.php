@@ -16,7 +16,7 @@ class UsersController extends Controller {
             if ($user && $user['is_active'] && $hash != $user['password']){
 
                 Session::setFlash('You are logged in as');
-                
+
             } else{
                 Session::set('login',$user['login']);
                 Session::set('role',$user['role']);
@@ -34,7 +34,6 @@ class UsersController extends Controller {
 
     public function admin_index(){
         $this->data['user'] = $this->model->getList();
-       // $this->data['user'] = $this->model->getUsersLimit();
     }
 
 
