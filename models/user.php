@@ -8,8 +8,8 @@ class User extends Model{
         $result = $this->db->query($sql);
 
         if(isset($result[0])){
-
             return $result[0];
+
         }
 
         return false;

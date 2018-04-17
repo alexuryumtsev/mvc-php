@@ -19,18 +19,20 @@ class Registration extends Model {
         $phone = $this->db->escape($data['phone']);
         $address = $this->db->escape($data['address']);
 
-        if (isset($data['sex'])) {
+        if (isset($data['man'])) {
             $sex = 'man';
         } else {
             $sex = 'woman';
         }
 
-//        $sql = "SELECT id FROM  users_data  WHERE email = '{$email}'";
-//
-//        $result = $this->db->query($sql);
-//        while ($row = $result->fetch()) {
-//            echo $row['email'] . "\n";
-//        }
+
+        $sql = "SELECT id FROM users_data WHERE email = '{$email}'";
+        $result = $this->db->query($sql);
+
+        if (isset($result[0]) ? $result[0] : null){
+            Session::setFlash('Such email exist!');
+        } else {
+
 
 
         if ($password == $e_password){
@@ -55,9 +57,7 @@ class Registration extends Model {
 
         }
 
-
-
-
+        }
     }
 
     public function getList(){
