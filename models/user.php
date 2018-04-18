@@ -9,9 +9,7 @@ class User extends Model{
 
         if(isset($result[0])){
             return $result[0];
-
         }
-
         return false;
     }
 

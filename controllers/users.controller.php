@@ -14,7 +14,7 @@ class UsersController extends Controller {
             $hash = md5(Config::get('salt').$_POST['password']);
 
             if ($user && $user['is_active'] && $hash != $user['password']){
-
+                Session::set();
                 Session::setFlash('You are logged in as');
 
             } else{
@@ -29,7 +29,7 @@ class UsersController extends Controller {
 
     public function admin_logout(){
         Session::destroy();
-        Router::redirect('/admin/');
+        Router::redirect('/');
     }
 
     public function admin_index(){

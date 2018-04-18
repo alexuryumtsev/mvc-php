@@ -14,11 +14,11 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/"></a>
+            <a class="navbar-brand" href="/"><?Session::get('login')?></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/admin/users/login">Login</a></li>
+                <li><a <?php if(Session::get('login')) { Router::redirect('/admin/users/');}?>href="/admin/users/login">Login</a></li>
                 <li><a <?php if(App::getRouter()->getController() == 'contacts') { ?> class="active" <?php }?> href="/contacts/">Registration</a></li>
             </ul>
         </div><!--/.nav-collapse -->
