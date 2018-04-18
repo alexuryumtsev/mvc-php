@@ -23,11 +23,8 @@ class Registration extends Model {
         $address = $this->db->escape($data['address']);
 
         if (isset($data['sex'])) {
-            $sex = 'man';
-        } else {
-            $sex = 'woman';
+            $sex = $data['sex'];
         }
-
 
         if(strlen($login) < 4) {
             Session::setFlash('Login < 4!');
