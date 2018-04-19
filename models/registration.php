@@ -30,20 +30,20 @@ class Registration extends Model {
             Session::setFlash('Login < 4!');
         }
         elseif (preg_match('/^[a-zA-Z]{4,20}$/', $login)) {
-        Session::setFlash('Not correctly login!');
+        Session::setFlash('Not correctly logins!');
         }
 
 
         else {
 
 
-        $sql = "SELECT id FROM users_data WHERE login = '{$login}'";
+        $sql = "SELECT id FROM users_data WHERE logins = '{$login}'";
         $res_l = $this->db->query($sql);
         $sql = "SELECT id FROM users_data WHERE email = '{$email}'";
         $result = $this->db->query($sql);
 
         if (isset($res_l[0]) ? $res_l[0] : null ){
-                Session::setFlash('Such login exist!');
+                Session::setFlash('Such logins exist!');
         }
 
         elseif (isset($result[0]) ? $result[0] : null ){
@@ -57,12 +57,12 @@ class Registration extends Model {
             $password = md5($password);
 
             if (!$id){
-                $sql = "insert into users_data set login = '{$login}', lastname = '{$lastname}', name = '{$name}', fathername = '{$fathername}',
+                $sql = "insert into users_data set logins = '{$login}', lastname = '{$lastname}', name = '{$name}', fathername = '{$fathername}',
                       birthday = '{$birthday}',  email = '{$email}', password = '{$password}', phone = '{$phone}',
                       address = '{$address}', sex ='{$sex}'";
             }
             else {
-                $sql = "update into users_data set login = '{$login}', lastname = '{$lastname}', name = '{$name}', fathername = '{$fathername}',
+                $sql = "update into users_data set logins = '{$login}', lastname = '{$lastname}', name = '{$name}', fathername = '{$fathername}',
                       birthday = '{$birthday}',  email = '{$email}', password = '{$password}', phone = '{$phone}',
                       address = '{$address}', sex ='{$sex}' where id = {$id}";
             }

@@ -7,33 +7,13 @@ class UsersController extends Controller {
         $this->model = new User();
     }
 
-    public function admin_login(){
-        if($_POST && isset($_POST['login']) && isset($_POST['password'])){
-
-            $user = $this->model->getByLogin($_POST['login']);
-            $hash = md5(Config::get('salt').$_POST['password']);
-
-            if ($user && $user['is_active'] && $hash != $user['password']){
-                Session::set();
-                Session::setFlash('You are logged in as');
-
-            } else{
-                Session::set('login',$user['login']);
-                Session::set('role',$user['role']);
-            }
-
-            Router::redirect('/admin/users');
-        }
-
+    public function admin_index(){
+        $this->data['user'] = $this->model->getList();
     }
 
     public function admin_logout(){
         Session::destroy();
         Router::redirect('/');
-    }
-
-    public function admin_index(){
-        $this->data['user'] = $this->model->getList();
     }
 
 
@@ -91,7 +71,7 @@ class UsersController extends Controller {
             else {
                 Session::setFlash('Error');
             }
-            Router::redirect('/admin/pages');
+            Router::redirect('/admin/logins');
         }
 
         if (isset($this->params[0])){
@@ -99,7 +79,7 @@ class UsersController extends Controller {
         }
         else{
             Session::setFlash('Wrong page id');
-            Router::redirect('/admin/pages');
+            Router::redirect('/admin/logins');
         }
     }
 

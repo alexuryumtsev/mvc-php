@@ -46,7 +46,7 @@ INSERT INTO `messages` (`id`, `name`, `email`, `message`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pages`
+-- Table structure for table `logins`
 --
 
 CREATE TABLE `pages` (
@@ -58,7 +58,7 @@ CREATE TABLE `pages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `pages`
+-- Dumping data for table `logins`
 --
 
 INSERT INTO `pages` (`id`, `alias`, `title`, `content`, `is_published`) VALUES
@@ -133,7 +133,7 @@ ALTER TABLE `messages`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `pages`
+-- Indexes for table `logins`
 --
 ALTER TABLE `pages`
   ADD PRIMARY KEY (`id`);
@@ -160,7 +160,7 @@ ALTER TABLE `users_data`
 ALTER TABLE `messages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
--- AUTO_INCREMENT for table `pages`
+-- AUTO_INCREMENT for table `logins`
 --
 ALTER TABLE `pages`
   MODIFY `id` tinyint(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
