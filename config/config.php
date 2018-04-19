@@ -16,6 +16,7 @@ Config::set('db.host','localhost');
 Config::set('db.user','newuser');
 Config::set('db.password','111');
 Config::set('db.db_name','mvc');
+Config::set('db.charset','utf-8');
 
 
 Config::set('salt','ashew234ru2h023042klrp34okdf043');

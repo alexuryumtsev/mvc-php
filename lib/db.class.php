@@ -4,14 +4,22 @@ class DB {
     protected $connection;
 
     public function __construct($host,$user,$password,$db_name){
-        $this->connection = new mysqli($host,$user,$password,$db_name);
 
-        if (mysqli_connect_error()){
+       $dsn = "mysql:host=$host;dbname=$db_name";
+       $opt = [
+           PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+           PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+           PDO::ATTR_EMULATE_PREPARES   => false,
+       ];
 
-            throw new Exception('Could not connect to DB');
+        try {
+            $this->connection = new PDO($dsn,$user,$password,$opt);
+        } catch (PDOException $e) {
+            die('Подключение не удалось: ' . $e->getMessage());
         }
 
     }
+
 
     public function query($sql){
         if (!$this->connection){
@@ -19,22 +27,18 @@ class DB {
         }
         $result = $this->connection->query($sql);
 
-        if (mysqli_error($this->connection)){
-            throw new Exception(mysqli_error($this->connection));
-        }
 
         if (is_bool($result)){
             return $result;
         }
 
         $data = array();
-        while ($row = mysqli_fetch_assoc($result)){
+        while ($row = PDO::FETCH_ASSOC){
             $data[] = $row;
         }
         return $data;
     }
-
     public function escape($str){
-        return mysqli_escape_string($this->connection,$str);
+        return $this->connection->quote($str);
     }
 }
