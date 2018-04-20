@@ -67,7 +67,7 @@ class Registration extends Model {
                       address = '{$address}', sex ='{$sex}' where id = {$id}";
             }
 
-            return $this->db->query($sql);
+            return $this->db->prepare($sql);
 
         } else {
             Session::setFlash('Passwords do not match!!');

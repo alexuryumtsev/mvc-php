@@ -3,14 +3,14 @@ class Login extends Model{
 
     public function getByLogin($login){
 
-        $sql = $this->connecton->prepare("SELECT * FROM users WHERE login = :login");
-        $sql->execute(array('login' => $login));
+        $sql = "SELECT * FROM users WHERE login = :login";
+        $sth = $this->db->prepare($sql);
+        $sth->execute(array(':login' => $login));
+        $row = $sth->fetch(PDO::FETCH_ASSOC);
 
-        $result = $this->connection->query($sql);
-        
-        if(isset($result[0])){
-            return $result[0];
+        if($row === false){
+            return false;
         }
-        return false;
+        return $row;
     }
 }

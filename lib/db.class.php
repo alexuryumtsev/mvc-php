@@ -20,23 +20,12 @@ class DB {
 
     }
 
+    public function prepare($sql){
+        return $this->connection->prepare($sql);
 
-    public function query($sql){
-        if (!$this->connection){
-            return false;
-        }
-        $result = $this->connection->query($sql);
-
-
-        if (is_bool($result)){
+        if ( ($result)){
             return $result;
         }
-
-        $data = array();
-        while ($row = PDO::FETCH_ASSOC){
-            $data[] = $row;
-        }
-        return $data;
     }
     public function escape($str){
         return $this->connection->quote($str);

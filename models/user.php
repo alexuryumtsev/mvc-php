@@ -4,7 +4,7 @@ class User extends Model{
 
     public function getList(){
 
-        if (isset($_GET[page])){
+        if (isset($_GET['page'])){
             $page = $_GET['page'];
         } else $page = 1;
 
@@ -12,7 +12,7 @@ class User extends Model{
         $art = ($page * $kol)-$kol;
 
         $result = "SELECT * FROM users_data LIMIT $art,$kol";
-        return $this->db->query($result);
+        return $this->db->prepare($result);
 
     }
 
@@ -21,7 +21,7 @@ class User extends Model{
 
         $id = (int)$id;
         $sql="select * from users_data where id = '{$id}' limit 1";
-        $result = $this->db->query($sql);
+        $result = $this->db->prepare($sql);
         return isset($result[0]) ? $result[0] : null;
     }
 
@@ -56,14 +56,14 @@ class User extends Model{
                     phone = '{$phone}', address = '{$address}', sex = '{$sex}' where id = '{$id}'";
         }
 
-        return $this->db->query($sql);
+        return $this->db->prepare($sql);
     }
 
 
     public function delete($id){
         $id = (int)$id;
         $sql = "delete from users_data where id = {$id}";
-        return $this->db->query($sql);
+        return $this->db->prepare($sql);
     }
 
 }
