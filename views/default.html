@@ -28,6 +28,8 @@
 <div class="container">
 
     <div class="starter-template">
+
+        <?php if (Session::get('login')) {Session::setFlash('You ADMIN');}?>
         <?php if (Session::hasFlash() ) { ?>
 
         <div class="alert alert-info" role="alert">

@@ -20,8 +20,9 @@ class UsersController extends Controller {
     public function admin_edit(){
 
         if($_POST){
-
+         //   var_dump($_POST); die;
             $id = isset($_POST['$id']) ? $_POST['$id'] : null;
+
             $result = $this->model->save($_POST, $id);
 
             if($result){
@@ -47,7 +48,6 @@ class UsersController extends Controller {
         if (isset($this->params[0])){
             $result = $this->model->delete($this->params[0]);
 
-
             if($result){
                 Session::setFlash('Page was delete.');
             }
@@ -71,7 +71,7 @@ class UsersController extends Controller {
             else {
                 Session::setFlash('Error');
             }
-            Router::redirect('/admin/logins');
+            Router::redirect('/admin/users');
         }
 
         if (isset($this->params[0])){
@@ -79,7 +79,7 @@ class UsersController extends Controller {
         }
         else{
             Session::setFlash('Wrong page id');
-            Router::redirect('/admin/logins');
+            Router::redirect('/admin/users');
         }
     }
 

@@ -23,9 +23,11 @@ class DB {
     public function prepare($sql){
         return $this->connection->prepare($sql);
 
-        if ( ($result)){
-            return $result;
-        }
+    }
+
+    public function query($sql){
+        return $this->connection->query($sql);
+
     }
     public function escape($str){
         return $this->connection->quote($str);

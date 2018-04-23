@@ -17,20 +17,18 @@
 
 <br/>
 
-<?php
+ <?php
+    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+    $p = new Pagination(array('itemsCount' => 11,'itemsPerPage' => 3, 'currentPage' => $page));
+ ?>
 
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-
-$p = new Pagination(array('itemsCount' => 11,'itemsPerPage' => 4, 'currentPage' => $page));
-?>
-
-<?php foreach ($p->buttons as $button) :
-if ($button->isActive) : ?>
-<a href = '?page=<?=$button->page?>'><?=$button->text?></a>
-<?php else : ?>
-<span style="color:#555555"><?=$button->text?></span>
-<?php endif;
-endforeach; ?>
+ <?php foreach ($p->buttons as $button) :
+    if ($button->isActive) : ?>
+    <a href = '?page=<?=$button->page?>'><?=$button->text?></a>
+ <?php else : ?>
+    <span style="color:#555555"><?=$button->text?></span>
+ <?php endif;
+ endforeach; ?>
 
 
 

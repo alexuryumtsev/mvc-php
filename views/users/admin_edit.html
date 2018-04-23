@@ -4,6 +4,11 @@
     <input type="hidden" name="id" value="<?=$data['user']['id']?>"/>
 
     <div class="form-group">
+        <label for="login">Login</label>
+        <input type="text" id="login" name="login" value="<?=$data['user']['login']?>" class="form-control">
+    </div>
+
+    <div class="form-group">
         <label for="lastname">Last Name</label>
         <input type="text" id="lastname" name="lastname" value="<?=$data['user']['lastname']?>" class="form-control">
     </div>
@@ -26,6 +31,11 @@
     <div class="form-group">
         <label for="email">email</label>
         <textarea name="email" id="email" class="form-control"><?=$data['user']['email']?></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password</label>
+        <textarea name="password" id="password" class="form-control"><?=$data['user']['password']?></textarea>
     </div>
 
     <div class="form-group">

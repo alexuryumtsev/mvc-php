@@ -7,20 +7,20 @@ class Registration extends Model {
 
         $id = (int)$id;
 
-        $login = $this->db->escape($data['login']);
+        $login = $data['login'];
 
-        $lastname = $this->db->escape($data['lastname']);
-        $name = $this->db->escape($data['name']);
-        $fathername = $this->db->escape($data['fathername']);
+        $lastname = $data['lastname'];
+        $name = $data['name'];
+        $fathername = $data['fathername'];
 
-        $birthday = $this->db->escape($data['birthday']);
-        $email = $this->db->escape($data['email']);
+        $birthday = $data['birthday'];
+        $email = $data['email'];
 
-        $password = $this->db->escape($data['password']);
-        $e_password = ($data['e_password']);
+        $password = $data['password'];
+        $e_password =$data['e_password'];
 
-        $phone = $this->db->escape($data['phone']);
-        $address = $this->db->escape($data['address']);
+        $phone = $data['phone'];
+        $address = $data['address'];
 
         if (isset($data['sex'])) {
             $sex = $data['sex'];
@@ -30,23 +30,29 @@ class Registration extends Model {
             Session::setFlash('Login < 4!');
         }
         elseif (preg_match('/^[a-zA-Z]{4,20}$/', $login)) {
-        Session::setFlash('Not correctly logins!');
+        Session::setFlash('Not correctly login!');
         }
 
 
-        else {
+       else {
 
 
-        $sql = "SELECT id FROM users_data WHERE logins = '{$login}'";
-        $res_l = $this->db->query($sql);
-        $sql = "SELECT id FROM users_data WHERE email = '{$email}'";
-        $result = $this->db->query($sql);
+        $sql = "SELECT id FROM users_data WHERE login = :login";
+            $sth = $this->db->prepare($sql);
+            $sth->execute(array(':login' => $login));
+            $row_l = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-        if (isset($res_l[0]) ? $res_l[0] : null ){
+        $sql = "SELECT id FROM users_data WHERE email = :email";
+            $sth = $this->db->prepare($sql);
+            $sth->execute(array(':email' => $email));
+            $row = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+
+        if (isset($row_l[0]) ? $row_l[0] : null ){
                 Session::setFlash('Such logins exist!');
         }
 
-        elseif (isset($result[0]) ? $result[0] : null ){
+        elseif (isset($row[0]) ? $row[0] : null ){
             Session::setFlash('Such email exist!');
         }
 
@@ -57,17 +63,21 @@ class Registration extends Model {
             $password = md5($password);
 
             if (!$id){
-                $sql = "insert into users_data set logins = '{$login}', lastname = '{$lastname}', name = '{$name}', fathername = '{$fathername}',
-                      birthday = '{$birthday}',  email = '{$email}', password = '{$password}', phone = '{$phone}',
-                      address = '{$address}', sex ='{$sex}'";
+                $sql = "insert into users_data set login = :login, lastname = :lastname, name = :name, 
+                    fathername = :fathername, birthday = :birthday, email = :email, password = :password,
+                    phone = :phone, address = :address, sex = :sex";
             }
             else {
-                $sql = "update into users_data set logins = '{$login}', lastname = '{$lastname}', name = '{$name}', fathername = '{$fathername}',
-                      birthday = '{$birthday}',  email = '{$email}', password = '{$password}', phone = '{$phone}',
-                      address = '{$address}', sex ='{$sex}' where id = {$id}";
+                $sql = "update into users_data set login = :login, lastname = :lastname, name = :name, 
+                    fathername = :fathername, birthday = :birthday, email = :email, password = :password,
+                    phone = :phone, address = :address, sex = :sex";
             }
 
-            return $this->db->prepare($sql);
+            $sth = $this->db->prepare($sql);
+            $sth->execute(array(':login' => $login,':lastname' => $lastname,':name' => $name,':fathername' => $fathername,':birthday' => $birthday,
+                ':email' => $email,':password' => $password,':phone' => $phone, ':address' => $address,':sex' => $sex));
+            $row = $sth->fetchAll(PDO::FETCH_ASSOC);
+            return $row;
 
         } else {
             Session::setFlash('Passwords do not match!!');
@@ -75,14 +85,16 @@ class Registration extends Model {
         }
 
         }
-        }
+       }
     }
 
     public function getList(){
 
         $sql =  "select * from users_data where 1";
 
-        return $this->db->query($sql);
+        $sth =  $this->db->query($sql);
+        $row = $sth->fetchAll(PDO::FETCH_ASSOC);
+        return $row;
     }
 
 

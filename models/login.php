@@ -5,6 +5,7 @@ class Login extends Model{
 
         $sql = "SELECT * FROM users WHERE login = :login";
         $sth = $this->db->prepare($sql);
+
         $sth->execute(array(':login' => $login));
         $row = $sth->fetch(PDO::FETCH_ASSOC);
 

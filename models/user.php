@@ -11,8 +11,12 @@ class User extends Model{
         $kol = 3;
         $art = ($page * $kol)-$kol;
 
-        $result = "SELECT * FROM users_data LIMIT $art,$kol";
-        return $this->db->prepare($result);
+        $sql = "SELECT * FROM users_data LIMIT $art,$kol";
+        $sth =  $this->db->query($sql);
+        $row = $sth->fetchAll(PDO::FETCH_ASSOC);
+        //var_dump($row); die;
+        return $row;
+
 
     }
 
@@ -20,50 +24,55 @@ class User extends Model{
     public function getById($id){
 
         $id = (int)$id;
-        $sql="select * from users_data where id = '{$id}' limit 1";
-        $result = $this->db->prepare($sql);
-        return isset($result[0]) ? $result[0] : null;
+        $sql="select * from users_data where id = :id";
+        $sth =  $this->db->prepare($sql);
+        $sth->execute(array(':id' => $id));
+        $row = $sth->fetchAll(PDO::FETCH_ASSOC);
+        return isset($row[0]) ? $row[0] : null;
     }
 
     public function save($data, $id = null){
 
-        if (!isset($data['lastname']) || !isset($data['name']) || !isset($data['fathername']) || !isset($data['birthday']) || !isset($data['email'])
-
-            || !isset($data['password']) || !isset($data['phone']) || !isset($data['address']) || !isset($data['sex'])){
-            return false;
-        }
-
         $id = (int)$id;
-        $lastname = $this->db->escape($data['lastname']);
-        $name = $this->db->escape($data['name']);
-        $fathername = $this->db->escape($data['fathername']);
-        $birthday = $this->db->escape($data['birthday']);
-        $email = $this->db->escape($data['email']);
-        $password = $this->db->escape($data['password']);
-        $phone = $this->db->escape($data['phone']);
-        $address = $this->db->escape($data['address']);
-        $sex = $this->db->escape($data['sex']);
+        $login = $data['login'];
+        $lastname = $data['lastname'];
+        $name = $data['name'];
+        $fathername =$data['fathername'];
+        $birthday = $data['birthday'];
+        $email = $data['email'];
+        $password = $data['password'];
+        $phone = $data['phone'];
+        $address =$data['address'];
+        $sex = $data['sex'];
 
 
         if (!$id){
-            $sql = "insert into users_data set lastname = '{$lastname}', name = '{$name}', 
-                    fathername = '{$fathername}', birthday = '{$birthday}', email = '{$email}', 
-                    password = '{$password}', phone = '{$phone}', address = '{$address}', sex = '{$sex}'";
+            $sql = "insert into users_data set login = :login, lastname = :lastname, name = :name, 
+                    fathername = :fathername, birthday = :birthday, email = :email, password = :password,
+                    phone = :phone, address = :address, sex = :sex";
         }
         else {
-            $sql = "update into users_data set lastname = '{$lastname}', name = '{$name}', 
-                    fathername = '{$fathername}', email= '{$email}', password = '{$password}', 
-                    phone = '{$phone}', address = '{$address}', sex = '{$sex}' where id = '{$id}'";
+            $sql = "update into users_data set login = :login, lastname = :lastname, name = :name, 
+                    fathername = :fathername, birthday = :birthday, email = :email, password = :password,
+                    phone = :phone, address = :address, sex = :sex";
         }
 
-        return $this->db->prepare($sql);
+        $sth = $this->db->prepare($sql);
+        $sth->execute(array(':login' => $login,':lastname' => $lastname,':name' => $name,':fathername' => $fathername,':birthday' => $birthday,
+        ':email' => $email,':password' => $password,':phone' => $phone, ':address' => $address,':sex' => $sex));
+        $row = $sth->fetchAll(PDO::FETCH_ASSOC);
+        return $row;
     }
 
 
     public function delete($id){
         $id = (int)$id;
-        $sql = "delete from users_data where id = {$id}";
-        return $this->db->prepare($sql);
+        $sql = "delete from users_data where id = :id";
+
+        $sth = $this->db->prepare($sql);
+        $sth->execute(array(':id' => $id));
+        $row = $sth->fetchAll(PDO::FETCH_ASSOC);
+        return $row;
     }
 
 }
