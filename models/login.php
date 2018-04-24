@@ -1,5 +1,13 @@
 <?php
-class Login extends Model{
+class Login{
+
+    protected $db;
+
+    public function  __construct()
+    {
+        $this->db = App::$db;
+    }
+
 
     public function getByLogin($login){
 

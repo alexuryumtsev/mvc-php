@@ -29,7 +29,9 @@ class App{
 
         if ($layout == 'admin' && Session::get('role') !='admin'){
             if ($controller_method !='admin_login'){
+
                 Router::redirect('/');
+
             }
         }
 

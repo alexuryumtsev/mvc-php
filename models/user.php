@@ -1,6 +1,13 @@
 <?php
 
-class User extends Model{
+class User{
+
+    protected $db;
+
+    public function  __construct()
+    {
+        $this->db = App::$db;
+    }
 
     public function getList(){
 
@@ -16,10 +23,7 @@ class User extends Model{
         $row = $sth->fetchAll(PDO::FETCH_ASSOC);
         //var_dump($row); die;
         return $row;
-
-
     }
-
 
     public function getById($id){
 
@@ -45,7 +49,6 @@ class User extends Model{
         $address =$data['address'];
         $sex = $data['sex'];
 
-
         if (!$id){
             $sql = "insert into users_data set login = :login, lastname = :lastname, name = :name, 
                     fathername = :fathername, birthday = :birthday, email = :email, password = :password,
@@ -64,7 +67,6 @@ class User extends Model{
         return $row;
     }
 
-
     public function delete($id){
         $id = (int)$id;
         $sql = "delete from users_data where id = :id";
@@ -74,5 +76,4 @@ class User extends Model{
         $row = $sth->fetchAll(PDO::FETCH_ASSOC);
         return $row;
     }
-
 }

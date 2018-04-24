@@ -1,6 +1,14 @@
 <?php
 
-class Registration extends Model {
+class Registration{
+
+    protected $db;
+
+    public function  __construct()
+    {
+        $this->db = App::$db;
+    }
+
 
     public function save($data, $id = null)
     {

@@ -1,5 +1,5 @@
 <?php
-class ContactsController extends Controller{
+class RegistrationsController extends Controller{
 
     public function __construct(array $data = array())
     {

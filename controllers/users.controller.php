@@ -20,11 +20,13 @@ class UsersController extends Controller {
     public function admin_edit(){
 
         if($_POST){
-         //   var_dump($_POST); die;
             $id = isset($_POST['$id']) ? $_POST['$id'] : null;
 
-            $result = $this->model->save($_POST, $id);
+            try {
+                $result = $this->model->save($_POST, $id);
+            } catch (PDOException $e) {
 
+            }
             if($result){
                 Session::setFlash('Page was saved.');
             }
@@ -43,6 +45,9 @@ class UsersController extends Controller {
         }
     }
 
+    /**
+     *
+     */
     public function admin_delete(){
 
         if (isset($this->params[0])){
